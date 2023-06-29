@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "@/public/logo.png";
+import logo from "../../../public/logo.png";
 import { koulen } from "../fonts";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ export default function NavBar() {
         className={`flex flex-wrap items-center justify-between p-4 ${koulen.className}`}
       >
         <Link href="/" className="flex items-center gap-4">
-          <Image src={logo} alt={"TS Gunpla Logo"} />
+          <Image src={logo} alt={"TS Gunpla Logo"} width={32} height={32} />
           <span className="self-center text-2xl font-semibold whitespace-nowrap bg-clip-text text-transparent bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
             TS Gunpla
           </span>
