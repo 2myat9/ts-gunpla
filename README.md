@@ -1,34 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Documentation
 
-## Getting Started
+### Pages
 
-First, run the development server:
+There are _4_ main pages to navigate across the site.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Home (`/`)
+- Projects (`/projects`)
+- About (`/about`)
+- Contact (`/contact`)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+From within `/projects`, you can navigate to each project by clicking on a card. The path of a project with a slug of `first-project` for example would be `/projects/first-project`. These pages are dynamic and are automatically created when you add a new document from within Sanity Studio. This is possible thanks to the CMS provided by Sanity.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Now more about Sanity.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Sanity
 
-## Learn More
+In the root directory, there is a folder called `sanity` for Sanity-related files. This is where Sanity is configured and embedded into the NextJS app. Some important concepts to note are **Schemas**, **Queries**, and **Portable Text**.
 
-To learn more about Next.js, take a look at the following resources:
+#### Schemas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You can define a schema for any document you wish to create/ edit in Sanity Studio. For this website, there is only _1_ main schema: Project. This is a document with fields that you can customize. Any document and its fields you define in the schema show up in the Studio as input fields. Refer to this [doc](https://www.sanity.io/docs/document-type) as a starting point.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### Queries
 
-## Deploy on Vercel
+In this project structure, all query functions are written inside `sanity-utils.ts`. These functions are then imported into the React Server Component where you wish to fetch the data and used asynchronously. Note that if you use these query functions inside a Client Component, you need to define the async function and call it inside a useEffect, storing the returned data inside a state. As of writing this, I have not tried using the `fetch` method. Also note that you can use either **GraphQL** or **groq** as the query language. In this project I am using `groq`. Refer [here](https://www.sanity.io/docs/groq) for documentation on groq.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+#### Portable Text
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Rich text input you edit in the Studio is returned as an array of Portable Text Blocks. Refer [here](https://www.sanity.io/docs/block-content) for the official definition of Portable Text. Rendering Portable Text in React was a challenge initially due to the high customizability. When you render Portable Text using the render component provided by Sanity with default configuration, the rendered text on the browser does not look as you would expect or what you see in the Sanity Studio Rich Text Editor. In order to even add line breaks between paragraphs, the render component has to be customized. Refer to Sanity's [documentation](https://github.com/portabletext/react-portabletext#types) for more information on how to pass custom props into this component.
+
+### Features
+
+Here is a list of currently implemented features.
+
+- Add new Project documents via Sanity Studio
+- For each Project, display a cover image, tags, rich text, and an interactive gallery of images.
+  - Each image in the gallery can have tags and captions thanks to the library used (see below).
+- Display all published documents on the Projects page
+- Dynamically filter Projects using the hard-coded **Featured Tags** section on the Projects page.
+  - This does not trigger additional API calls to Sanity-- it simply manipulates the state within the component.
+- Title and Content on the About Me page can be edited in Sanity Studio since this might need occasional updates.
+- Navigation Bar featuring logo and buttons to redirect to one of the _4_ main pages mentioned above.
+
+### Acknowledgement to Libraries Used
+
+- [React Grid Gallery](https://github.com/benhowell/react-grid-gallery/blob/master/examples/with-yet-another-react-lightbox/src/App.tsx) configured with [Yet-Another-Lightbox](https://github.com/igordanchenko/yet-another-react-lightbox)
+- [React Parallax Tilt](https://github.com/mkosir/react-parallax-tilt)
+
+### Tech Stack
+
+- NextJS 13
+- React 18
+- TypeScript 5
+- TailwindCSS
+- Sanity
