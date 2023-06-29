@@ -42,7 +42,7 @@ Here is a list of currently implemented features.
 - Title and Content on the About Me page can be edited in Sanity Studio since this might need occasional updates.
 - Navigation Bar featuring logo and buttons to redirect to one of the _4_ main pages mentioned above.
 
-### Acknowledgement to Libraries Used
+### Acknowledgement of Frontend Libraries Used
 
 - [React Grid Gallery](https://github.com/benhowell/react-grid-gallery/blob/master/examples/with-yet-another-react-lightbox/src/App.tsx) configured with [Yet-Another-Lightbox](https://github.com/igordanchenko/yet-another-react-lightbox)
 - [React Parallax Tilt](https://github.com/mkosir/react-parallax-tilt)
